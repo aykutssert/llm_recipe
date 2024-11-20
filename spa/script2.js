@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const loginSection = document.getElementById("login-section");
     const registerSection = document.getElementById("register-section");
@@ -13,7 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const userInput = document.getElementById("user-input");
     const sendMessageButton = document.getElementById("send-message");
     const imageUpload = document.getElementById("image-upload");
-  
+
+
+    const idToken = localStorage.getItem("idToken");
+    const email = localStorage.getItem("email");
+
+    if (idToken && email) {
+      // Oturum bilgisi mevcutsa, doğrudan chat sayfasına geç
+      loginSection.classList.add("hidden");
+      chatSection.classList.remove("hidden");
+      alert(`Welcome back, ${email}`);
+    }
     // Navigate between Login and Register
     goToRegister.addEventListener("click", (e) => {
       e.preventDefault();
@@ -42,6 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
         const data = await response.json();
         if (response.ok) {
+          // Token ve e-posta bilgilerini localStorage'da sakla
+          localStorage.setItem("idToken", data.idToken);
+          localStorage.setItem("email", data.email);
           alert(`Welcome ${data.email}`);
           loginSection.classList.add("hidden");
             chatSection.classList.remove("hidden");
