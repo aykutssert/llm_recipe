@@ -1,4 +1,8 @@
 streamlit
-pyrebase4
 firebase-admin
 langchain
+flask
+flask-cors
+langchain
+langchain-openai
+
